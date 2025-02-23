@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz del Peperone Crusco</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 5px;
+            width: 300px;
+            margin: 20px auto;
+        }
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            background-color: grey;
+            visibility: hidden;
+        }
+        .question {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz del Peperone Crusco</h1>
+    <div id="puzzle-container">
+        <!-- 6 Pezzi dell'immagine -->
+        <div class="puzzle-piece" id="piece1"></div>
+        <div class="puzzle-piece" id="piece2"></div>
+        <div class="puzzle-piece" id="piece3"></div>
+        <div class="puzzle-piece" id="piece4"></div>
+        <div class="puzzle-piece" id="piece5"></div>
+        <div class="puzzle-piece" id="piece6"></div>
+    </div><div id="quiz"></div>
+
+<script>
+    const questions = [
+        {   
+            question: "Quale città può essere definita 'la capitale' per Antonio Masi?", 
+            options: ["Roma", "Avigliano", "New York"], 
+            answer: "Avigliano",
+            piece: "piece1"
+        },
+        {   
+            question: "Come si chiamano i laghi italiani famosi in tutto il mondo?", 
+            options: ["Garda", "Como", "Sant' Vit'"] ,
+            answer: "Sant' Vit'",
+            piece: "piece2"
+        },
+        {   
+            question: "Qual è il piatto di pesce che l'America invidia di più all'Europa?", 
+            options: ["Brodo di pesce al Pernod", "Paella valenciana", "Baccalà alla ciauredda"], 
+            answer: "Baccalà alla ciauredda",
+            piece: "piece3"
+        },
+        {   
+            question: "Quale formula si usa in apertura di conversazione tra due estranei?", 
+            options: ["Hello", "A chi appartien'?", "Molto lieto"], 
+            answer: "A chi appartien'?",
+            piece: "piece4"
+        },
+        {   
+            question: "Come si chiama l'imbarcazione più nota nella storia della navigazione?", 
+            options: ["Arca di Nolé", "Amerigo Vespucci", "Luna Rossa"], 
+            answer: "Arca di Nolé",
+            piece: "piece5"
+        }
+    ];
+    
+    const quizContainer = document.getElementById("quiz");
+    
+    questions.forEach((q, index) => {
+        let div = document.createElement("div");
+        div.classList.add("question");
+        div.innerHTML = `<p>${q.question}</p>`;
+        
+        q.options.forEach(option => {
+            let button = document.createElement("button");
+            button.textContent = option;
+            button.onclick = function() {
+                if (option === q.answer) {
+                    document.getElementById(q.piece).style.backgroundImage = "url('peperone.jpg')";
+                    document.getElementById(q.piece).style.visibility = "visible";
+                    button.parentNode.innerHTML = `<p>✔ Risposta corretta!</p>`;
+                } else {
+                    alert("❌ Risposta errata, riprova!");
+                }
+            };
+            div.appendChild(button);
+        });
+        
+        quizContainer.appendChild(div);
+    });
+</script>
+
+</body>
+</html>
